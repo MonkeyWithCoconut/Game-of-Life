@@ -25,5 +25,5 @@ def test_apply_rule():
     metrix = [[0, 0, 0], [1, 1, 1], [0, 0 , 0]]
     assert Game_of_life.apply_rules(alive_list, metrix) == [[0, 1, 0], [0, 1, 0], [0, 1, 0]] 
 
-
+## cokolwiek
                                             
