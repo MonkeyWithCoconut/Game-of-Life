@@ -1,0 +1,5 @@
+FROM game-builder
+
+WORKDIR /Game-of-Life
+
+CMD ["pytest"]
