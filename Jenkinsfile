@@ -10,7 +10,7 @@ agent any
         stage('Pull'){
             steps{
                 echo "Pulling repo stage"
-                git branch: 'main', git credentialsId: '214186b5-9ef1-4191-8889-0ef338cffa0c', url: 'https://github.com/MonkeyWithCoconut/Game-of-Life.git'
+                git branch: 'main', credentialsId: '214186b5-9ef1-4191-8889-0ef338cffa0c', url: 'https://github.com/MonkeyWithCoconut/Game-of-Life.git'
      
             }
         }
