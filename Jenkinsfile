@@ -20,7 +20,10 @@ agent any
                 echo "Build stage"
                 sh '''
                 docker build -t game-builder:latest .
-                
+                docker run --name build_container game-builder:latest
+                docker cp build_container:/Game-of-Life/dist ./artifacts
+                docker logs build_container > log_build.txt
+
                 '''
             }
         }
@@ -30,7 +33,8 @@ agent any
                 echo "Test stage"
                 sh '''
                 docker build -t game-builder-test:latest -f ./Dockerfile2 .
-                
+                docker run --name test_container game-builder-test:latest
+                docker logs test_container > log_test.txt
                 '''
             }
         }
@@ -38,11 +42,9 @@ agent any
             steps {
                 echo "Deploy stage"
                 sh '''
-                docker run --name build_container game-builder:latest
-                docker logs build_container > log_build.txt
-
-                docker run --name test_container game-builder-test:latest
-                docker logs test_container > log_test.txt
+                docker build -t gameoflife-deploy:latest -f ./Dockerfile3 .
+                docker run --rm --name deploy_container gameoflife-deploy:latest
+                
 
                 '''
             }
@@ -53,7 +55,7 @@ agent any
                 echo "Publish stage"
                 sh '''
                 TIMESTAMP=$(date +%Y%m%d%H%M%S)
-                tar -czf artifact_$TIMESTAMP.tar.gz log_build.txt log_test.txt 
+                tar -czf artifact_$TIMESTAMP.tar.gz log_build.txt log_test.txt artifacts
                 
                 '''
             } 

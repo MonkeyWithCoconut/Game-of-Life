@@ -1,11 +1,11 @@
-FROM ubuntu:latest
-
-RUN apt-get update && apt-get install -y git
+FROM python:latest
 
 WORKDIR /Game-of-Life
 
 COPY . .
 
-RUN apt-get update && apt-get install -y python3 python3-pip
+RUN pip install pyinstaller
+
+RUN pyinstaller --onefile main.py Game_of_life.py
 
 RUN python3 -m pip install pytest
