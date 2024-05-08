@@ -62,7 +62,7 @@ agent any
                 tar -czf artifact_$TIMESTAMP.tar.gz log_build.txt log_test.txt artifacts
 
                 echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-                docker gameoflife-deploy:latest kamildziewa/gameoflife:latest
+                docker tag gameoflife-deploy:latest kamildziewa/gameoflife:latest
                 docker push kamildziewa/gameoflife:latest
                 docker logout
                 '''
