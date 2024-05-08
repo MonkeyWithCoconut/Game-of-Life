@@ -1,6 +1,10 @@
 pipeline {
 agent any
 
+        environment{
+            DOCKERHUB_CREDENTIALS = credentials('docker')
+    }
+
     triggers {
         pollSCM('* * * * *')
     }
@@ -56,7 +60,11 @@ agent any
                 sh '''
                 TIMESTAMP=$(date +%Y%m%d%H%M%S)
                 tar -czf artifact_$TIMESTAMP.tar.gz log_build.txt log_test.txt artifacts
-                
+
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                docker gameoflife-deploy:latest kamildziewa/gameoflife:latest
+                docker kamildziewa/gameoflife:latest
+                docker logout
                 '''
             } 
         }
