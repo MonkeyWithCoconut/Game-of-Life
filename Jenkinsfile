@@ -43,7 +43,7 @@ agent any
                 echo "Deploy stage"
                 sh '''
                 docker build -t gameoflife-deploy:latest -f ./Dockerfile3 .
-                docker run --rm --name deploy_container gameoflife-deploy:latest
+                docker run --rm -d --name deploy_container gameoflife-deploy:latest
                 
 
                 '''
