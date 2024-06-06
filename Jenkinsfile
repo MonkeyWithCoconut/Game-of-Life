@@ -63,7 +63,7 @@ agent any
 
                 echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
                 docker tag gameoflife-deploy:latest kamildziewa/gameoflife:1.0
-                docker push kamildziewa/gameoflife:latest
+                docker push kamildziewa/gameoflife:1.0
                 docker logout
                 '''
             } 
