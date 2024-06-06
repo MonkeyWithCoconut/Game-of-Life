@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY ./artifacts .
 
-CMD ./main
+CMD ./mainn
